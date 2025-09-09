@@ -12,9 +12,7 @@ export const ProductTitle = ({ title, className, style }: Props) => {
     const { product } = useContext(ProductContext)
 
     return (
-        <span className={`${styles.productDescription} ${className}`} style={{
-            backgroundColor: 'transparent'
-        }}>
+        <span className={`${styles.productDescription} ${className}`}>
             {title || product.title}
         </span>
     );

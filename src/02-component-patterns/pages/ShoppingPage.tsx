@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { ProductButtons, ProductCard, ProductImage, ProductTitle } from '../components/';
+import { Product } from '../interfaces/interfaces';
 import '../styles/custom-styles.css';
 
 const product = {
@@ -7,36 +9,61 @@ const product = {
   img: './coffee-mug.png'
 }
 
+const product2 = {
+  id: '2',
+  title: 'Coffee Mug - Meme',
+  img: './coffee-mug2.png'
+}
+
+const products: Product[] = [product, product2];
+
+interface ProductInCart extends Product {
+  count: number
+}
+
+
 export const ShoppingPage = () => {
+
+  const [shoppingCart, setShoppingCart] = useState<{ [key: string]: ProductInCart }>({});
+
+
   return (
     <div>
       <h1>ShoppingPage</h1>
       <hr />
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 20 }}>
-        <ProductCard product={product} className="bg-dark text-white">
+
+        {/* <ProductCard product={product} className="bg-dark text-white">
           <ProductCard.Image className='custom-image' />
           <ProductCard.Title title={'Nuevo Cafe'} className='text-white text-uppercase' />
           <ProductCard.Buttons className='custom-buttons' />
-        </ProductCard>
+        </ProductCard> */}
+        {
+          products.map(product => (
+            <ProductCard
+              product={product}
+              className="bg-dark text-white"
+              key={product.id}
+            >
+              <ProductImage className="custom-image" />
+              <ProductTitle className="text-white text-uppercase" />
+              <ProductButtons className="custom-buttons" />
+            </ProductCard>
+          ))
+        }
+      </div>
 
+      <div className='shopping-cart'>
         <ProductCard
           product={product}
           className="bg-dark text-white"
+          key={product.id}
+          style={{
+            width: '100px'
+          }}
         >
           <ProductImage className="custom-image" />
-          <ProductTitle className="text-white text-uppercase" />
-          <ProductButtons className="custom-buttons" />
-        </ProductCard>
-
-        <ProductCard
-          product={product}
-          style={{ 
-            backgroundColor: '#70D1F7',
-           }}
-          >
-          <ProductImage  />
-          <ProductTitle  />
-          <ProductButtons  />
+          <ProductButtons />
         </ProductCard>
       </div>
 
