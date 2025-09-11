@@ -13,11 +13,16 @@ export interface Product {
     img?: string;
 }
 
-export interface onChangeArgs{
+export interface onChangeArgs {
     product: Product,
     count: number
 }
 
 export interface ProductInCart extends Product {
-  count: number
+    count: number
+}
+
+export interface initialValues {
+    count?: number;
+    maxCount?: number;
 }
